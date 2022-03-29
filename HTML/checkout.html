@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-te-ví</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/index.html"><img class="logo" src="/ASSETS/logo.png" alt=""></a>
+        </div>
+        <h1>Bem-te-ví Ecommerce</h1>
+        <ul class="menu">
+            <div class="dropdown">
+                <button id="dropbtn">
+                  <i data-feather="menu"></i> Departamentos
+                </button>
+                <ul class="dropdown-content">
+                </ul>
+            </div>
+            <li><a href="/index.html">Inicio</a></li>
+            <li><a href="/HTML/orders.html">Meus Pedidos</a></li>
+        </ul>
+        <ul class="menu-2">
+            <li><i data-feather="user"></i><a href="/HTML/myacc.html"></a></li>
+            <li><i data-feather="shopping-cart"></i>Carrinho</li>
+        </ul>
+    </header>
+
+    <section class="conteudo">
+        <div class="embrulho">
+            <div class="container-info">
+                <h3>Informações Pedido</h3>
+                <div class="info">
+                    <div id="infoAdress">
+                        <h3>Endereço de entrega</h3>
+                        <p> <strong>Rua :</strong></p>
+                        <p> <strong>Bairro :</strong> </p>
+                        <p> <strong>Número :</strong> </p>
+                        <p> <strong>Complemento :</strong> </p>
+                        <p> <strong>CEP :</strong> </p>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <div id="infoPerson">
+                        <h3>Dados Pessoais</h3>
+                        <p> <strong>Nome : </strong></p>
+                        <p> <strong>CPF : </strong></p>
+                        <p> <strong>RG : </strong> </p>
+                        <p> <strong>Telefone : </strong></p>
+                        <p> <strong>Email : </strong> </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="checkout">
+                <div class="container-prod">
+                    <div class="card-img">
+
+                    </div>
+                    <h3>Produtos</h3>
+                    <div class="info-prod">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="container-pag">
+                    <h3>Forma de Pagamento</h3>
+                    <div class="grupo-pag">
+                        <input type="radio" name="pag" id="avista" value="avista" />
+                        <label for="avista"><i data-feather="dollar-sign"></i></label>
+                    </div>
+
+                    <div class="grupo-pag">
+                        <input type="radio" name="pag" id="cartcredt" value="credito" />
+                        <label for="credtcart"><i data-feather="credit-card"></i></label>
+                    </div>
+
+                    <div class="grupo-pag">
+                        <input type="radio" name="pag" id="boleto" value="boleto" />
+                        <label for="boleto"><i data-feather="file-text"></i></label>
+                    </div>
+
+                    <div class="grupo-pag">
+                        <input type="radio" name="pag" id="pix" value="pix" />
+                        <label for="pix"><i data-feather="smartphone"></i></label>
+                    </div>
+                </div>
+                <button id="finish-purchase" onClick="finishPurchase()">Finalizar Compra</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Desenvolvido por Gabriel<br>Projeto Beaba</p>
+    </footer>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>feather.replace()</script>
+    <script src="/JS/app.js"></script>
+    <script src="/JS/checkout.js"></script>
+</body>
+
+</html>
