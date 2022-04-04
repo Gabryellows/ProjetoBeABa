@@ -39,20 +39,21 @@ async function renderAdressData() {
     </div>
   </div>
   `
-
 }
 
 async function renderProducts() {
   let cartShop = Cookies.get('idShopCart');
   let infoCart = await axios.get(`http://localhost:3333/shopcartproduct/all/${cartShop}`);
+  let precoFinal = 0
   const resultado = infoCart.data.map(cartDetails => {
+    precoFinal += cartDetails.price * cartDetails.quantity;
     let totalPrice = cartDetails.price * cartDetails.quantity;
     let total = totalPrice.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
     })
     document.querySelector('.container-prod').innerHTML += `
-    <div class="container-prod">
+    <div class="card-item-prod">
       <div class="card-img">
         <img src="${cartDetails.img_src}">
       </div>
@@ -63,12 +64,77 @@ async function renderProducts() {
       </div>
     </div>
     `
+
   })
+    Cookies.set('finalPrice', precoFinal);
+    precoFinal = precoFinal.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  })
+  console.log(precoFinal);
+  document.querySelector('#precoTotal').innerHTML = `
+  <h4>Preco total : ${precoFinal}</h4>
+  `
 }
 
+async function finishPurch() {
+  let carts = document.querySelector('input[name="pag"]:checked').value;
+  if (carts == 1) {
+    credit_card = true;
+    debit_card = false;
+    bank_clip = false;
+    pix = false;
+    installment = 1;
+  } else if (carts == 2) {
+    credit_card = false;
+    debit_card = true;
+    bank_clip = false;
+    pix = false;
+    installment = 1;
+  } else if (carts == 3) {
+    credit_card = false;
+    debit_card = false;
+    bank_clip = true;
+    pix = false;
+    installment = 1;
+  } else if (carts == 4) {
+    credit_card = false;
+    debit_card = false;
+    bank_clip = false;
+    pix = true;
+    installment = 1;
+  }
 
-
+  const idPayment = await axios.post(`http://localhost:3333/payment`,{
+    credit_card,
+    debit_card,
+    bank_clip,
+    pix,
+    installment
+  })
+  let idCart = Cookies.get('idShopCart');
+  let final_price = Cookies.get('finalPrice');
+  await axios.put(`http://localhost:3333/shopcart/${idCart}`, {
+    final_price,
+    order_status: "Concluido",
+    payment_id : idPayment.data[0].id,
+    closed : true
+  });
+  let id = Cookies.get('id')
+  axios.get(`http://localhost:3333/shopcart/porusuario/${id}`)
+  .then(response => {
+    response.data.map(items => {
+      if (items.closed == false) {
+        Cookies.set('idShopCart', items.id)
+      }
+    })
+  })
+  setTimeout(() => {
+    window.location.href = "../index.html";
+  }, 2000);
+    }
 
 renderPersonData();
 renderAdressData();
 renderProducts();
+

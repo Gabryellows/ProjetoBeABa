@@ -53,10 +53,10 @@ class productsRepository {
   async update(id, name, quantity_in_stock, price, img_src, description, sale, category_id, provider_id) {
     const row = await db.query(`
     UPDATE schema.products
-    SET name = $1, quantity_in_stock = $2, price = $3, img_src = $4, description = $5, sale = $6, category_id = $7, provider_id = $8
-    WHERE id = $9
+    SET name = $2, quantity_in_stock = $3, price = $4, img_src = $5, description = $6, sale = $7, category_id = $8, provider_id = $9
+    WHERE id = $1
     RETURNING *
-    `, [name, quantity_in_stock, price, img_src, description, sale, category_id, provider_id, id])
+    `, [id, name, quantity_in_stock, price, img_src, description, sale, category_id, provider_id])
 
     return row;
   };

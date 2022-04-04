@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', shopcartController.index);
 router.get('/porusuario/:id', shopcartController.getShopCart);
+router.get('/order/:id', shopcartController.getOrders)
 router.get('/:id', shopcartController.show);
 // router.post('/', shopcartController.store);
 router.put('/:id', shopcartController.update);

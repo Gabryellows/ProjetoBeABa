@@ -22,13 +22,37 @@ class shopcartRepository {
   };
 
   async findByIdPerson(id) {
-    const [row] = await db.query(`
+    const row = await db.query(`
     SELECT *
     FROM schema.shop_cart
     WHERE person_id = $1
     `, [id]);
 
     return row;
+  };
+
+  async getOrders(id) {
+    const rows = await db.query(`
+    SELECT shop_cart.id,
+    shop_cart.person_id,
+    shop_cart.transport,
+    shop_cart.final_price,
+    shop_cart.order_status,
+    shop_cart.payment_id,
+    shop_cart.closed,
+    shop_cart.updated_at,
+	    CASE
+	    WHEN payments.credit_card = TRUE THEN 'Cartao de credito'
+	    WHEN payments.debit_card  = TRUE THEN 'A vista'
+	    WHEN payments.pix  = TRUE THEN 'Pix'
+	    WHEN payments.bank_clip  = TRUE THEN 'Boleto'
+	    END metodopagamento
+	    FROM schema.payments
+	    INNER JOIN schema.shop_cart ON payments.id = shop_cart.payment_id
+      WHERE shop_cart.person_id = $1
+    `, [id]);
+
+    return rows;
   };
 
   async create ({person_id, transport, final_price, order_status, payment_id, closed}){
@@ -41,13 +65,13 @@ class shopcartRepository {
     return row;
   };
 
-  async update(id, person_id, transport, final_price, order_status, payment_id, closed) {
+  async update(id, final_price, order_status, payment_id, closed) {
     const row = await db.query (`
     UPDATE schema.shop_cart
-    SET person_id = $2, transport = $3, final_price = $4, order_status = $5, closed = $6, payment_id = $7,
+    SET final_price = $2, order_status = $3, payment_id = $4, closed = $5
     WHERE id = $1
     RETURNING *
-    `, [id, person_id, transport, final_price, order_status, payment_id, closed]);
+    `, [id, final_price, order_status, payment_id, closed]);
 
     return row;
   };

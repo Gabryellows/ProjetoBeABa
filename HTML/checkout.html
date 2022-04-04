@@ -63,39 +63,35 @@
             </div>
             <div class="checkout">
                 <div class="container-prod">
-                    <div class="card-img">
-
-                    </div>
                     <h3>Produtos</h3>
-                    <div class="info-prod">
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    </div>
                 </div>
+
                 <div class="container-pag">
                     <h3>Forma de Pagamento</h3>
-                    <div class="grupo-pag">
-                        <input type="radio" name="pag" id="avista" value="avista" />
-                        <label for="avista"><i data-feather="dollar-sign"></i></label>
+                    <div class="grupo-pag avista">
+                        <input type="radio" name="pag" id="avista" value="2"/>
+                        <label for="avista"><i data-feather="dollar-sign"></i>À vista</label>
                     </div>
 
-                    <div class="grupo-pag">
-                        <input type="radio" name="pag" id="cartcredt" value="credito" />
-                        <label for="credtcart"><i data-feather="credit-card"></i></label>
+                    <div class="grupo-pag credito">
+                        <input type="radio" name="pag" id="cartcredt" value="1" />
+                        <label for="credtcart"><i data-feather="credit-card"></i>Crédito</label>
                     </div>
 
-                    <div class="grupo-pag">
-                        <input type="radio" name="pag" id="boleto" value="boleto" />
-                        <label for="boleto"><i data-feather="file-text"></i></label>
+                    <div class="grupo-pag boleto">
+                        <input type="radio" name="pag" id="boleto" value="3" />
+                        <label for="boleto"><i data-feather="file-text"></i>Boleto</label>
                     </div>
 
-                    <div class="grupo-pag">
-                        <input type="radio" name="pag" id="pix" value="pix" />
-                        <label for="pix"><i data-feather="smartphone"></i></label>
+                    <div class="grupo-pag pix">
+                        <input type="radio" name="pag" id="pix" value="4" />
+                        <label for="pix"><i data-feather="smartphone"></i>Pix</label>
                     </div>
+                    <div id="precoTotal">
+                    </div>
+                    <button id="finish-purchase" onClick="finishPurch()">Finalizar Compra</button>
                 </div>
-                <button id="finish-purchase" onClick="finishPurchase()">Finalizar Compra</button>
+
             </div>
         </div>
     </section>

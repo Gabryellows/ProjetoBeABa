@@ -56,7 +56,10 @@ function saveId (key) {
 function getCart(id) {
   axios.get(`http://localhost:3333/shopcart/porusuario/${id}`)
   .then(response => {
-    let pedido = response.data
-    Cookies.set('idShopCart', pedido.id)
+    response.data.map(items => {
+      if (items.closed == false) {
+        Cookies.set('idShopCart', items.id)
+      }
+    })
   })
 }

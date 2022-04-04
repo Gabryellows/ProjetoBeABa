@@ -9,7 +9,7 @@ const shopcartproduct = require ('./route/shopcartproduct');
 const product = require('./route/product');
 const categorie = require('./route/categories');
 const provider = require('./route/provider');
-
+const autoPurchase = require('./route/autoPurchase');
 
 
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use('/shopcartproduct', shopcartproduct);
 app.use('/product', product);
 app.use('/categories', categorie);
 app.use('/providers', provider);
+app.use('/auto-purchase', autoPurchase);
 
 app.listen(3333, () => console.log('🌌 Server started at http://localhost:3333 🌌'));
 

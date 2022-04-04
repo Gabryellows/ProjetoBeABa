@@ -17,11 +17,18 @@ class shopcartController {
       response.json(userId);
     };
 
+    async getOrders (request, response) {
+      const {id} = request.params;
+      const shopCartOrder = await shopcartRepository.getOrders(id);
+
+
+      response.json(shopCartOrder);
+    }
+
     async getShopCart(request, response) {
       const { id } = request.params;
       const shopCartId = await shopcartRepository.findByIdPerson(id);
       if (!shopCartId) {
-        console.log('if')
         const person_id = id
         const transport = 0
         const final_price = 0
@@ -40,12 +47,14 @@ class shopcartController {
 
         response.json(pedido);
       }
-      else if (shopCartId.closed == false){
-        console.log('elsif')
-        response.json(shopCartId);
-      }
-      else {
-        console.log('else')
+      let status = false;
+      shopCartId.map(item => {
+        if (item.closed == false) {
+          status = true;
+          response.json(shopCartId)
+        }
+      })
+        if (status == false){
         const person_id = id
         const transport = 0
         const final_price = 0
@@ -100,9 +109,9 @@ class shopcartController {
 
   async update(request, response){
     const {id} = request.params;
-    const {person_id, transport, final_price, order_status, payment_id, closed} = request.body;
+    const {final_price, order_status, payment_id, closed} = request.body;
 
-    const shopcart = await adressesRepository.update(id, person_id, transport, final_price, order_status, payment_id, closed);
+    const shopcart = await shopcartRepository.update(id, final_price, order_status, payment_id, closed);
     response.json(shopcart);
   };
 

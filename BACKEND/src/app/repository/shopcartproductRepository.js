@@ -15,7 +15,7 @@ class shopcartproductRepository {
     const row = await db.query(`
     SELECT *
     FROM schema.shop_cart_products
-    WHERE id = $1
+    WHERE shop_cart_id = $1
     `, [id]);
 
     return row;

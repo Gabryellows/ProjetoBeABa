@@ -12,7 +12,7 @@ class adressesRepository {
   }
 
   async findById(id) {
-    const row = await db.query(`
+    const [row] = await db.query(`
       SELECT *
       FROM schema.adresses
       WHERE id = $1

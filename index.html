@@ -34,7 +34,30 @@
             <li><i data-feather="shopping-cart"></i><a href="/HTML/cart.html">Carrinho</a></li>
         </ul>
     </header>
-
+    <div class="robo">
+      <p class="legend_robo">Carrinho automatizado</p>
+      <div class="modal_robo closed">
+          <h4>Adicione sua lista de compras!</h4>
+          <p>Faça um upload de um arquivo CSV, contendo o ID do produto e a quantidade
+              que deseja, após, clique em Enviar e os produtos serão adicionados automáticamente
+              no carrinho!
+          </p>
+          <a class="download" download href="./BACKEND/API_Python/public/teste.csv">Download modelo</a>
+          <form class="form_robo">
+               <label class="robo_label" for="file">
+                  <input class="file_input"
+                         id="file"
+                         type="file"
+                         accept=".csv,.xlsx"
+                         />
+              </label>
+              <button class="robo_submit" onclick="uploadFile()">Enviar</button>
+          </form>
+      </div>
+      <button class="robo_cart">
+          <img  class="robots" src="/ASSETS/chatbot.png">
+      </button>
+  </div>
     <section class="conteudo">
         <section id="prod-container">
         </section>
@@ -45,6 +68,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>feather.replace()</script>
     <script src="/JS/app.js"></script>
+    <script src="/JS/robot.js"></script>
     <script src="/JS/login.js"></script>
     <script src="/JS/main.js"></script>
 </body>

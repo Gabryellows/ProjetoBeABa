@@ -3,8 +3,8 @@ const shopcartproductRepository = require ('../repository/shopcartproductReposit
 class shopcartproductController {
   async index (request, response) {
     const shop_cart_product = await shopcartproductRepository.findAll();
-
     response.json(shop_cart_product);
+
   };
 
   async show(request, response) {
@@ -27,13 +27,11 @@ class shopcartproductController {
     response.json(cartId);
   }
 
-
-
   async store(request, response) {
     const {
       shop_cart_id, product_id, quantity,
     } = request.body;
-
+    console.log(request.body);
     if (!shop_cart_id) {
       return response.status(400).json({ error: 'Shop cart ID is required' });
     }

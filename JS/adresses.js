@@ -1,11 +1,3 @@
-document.querySelector('.acoes').onchange = toggleBilling;
-function toggleBilling() {
-  let billingItems = document.querySelectorAll('.endereco input[type="text"]');
-
-  for (let i = 0; i < billingItems.length; i++) {
-    billingItems[i].disabled = !billingItems[i].disabled;
-  }
-}
 
 function registerAdress() {
   let rua = document.querySelector("#adress").value;
@@ -17,15 +9,17 @@ function registerAdress() {
   let cep = document.querySelector("#zipcode").value;
   let idperson = Cookies.get('id')
       axios.post("http://localhost:3333/adresse", {
-      address: rua,
-      house_number: numero,
-      complement: complemento,
-      district: bairro,
-      city: cidade,
-      states: estado,
-      zipcode: cep,
-      person_id: idperson
+
+        address: rua,
+        house_number: numero,
+        complement: complemento,
+        district: bairro,
+        city: cidade,
+        states: estado,
+        zipcode: cep,
+        person_id: idperson
     }).then((response)=>{
+      alert('Endereço cadastrado!')
       console.log(response);
     }).catch((response) => {
       console.log(response);
@@ -38,8 +32,9 @@ async function renderAdresses () {
   let personId = Cookies.get('id');
 
   let infoAdress = await axios.get(`http://localhost:3333/adresse/findByPerson/${personId}`)
-  infoAdress = infoAdress.data
-
+  if (infoAdress.data == false) {
+    return infoAdress.data = ''
+  } else {
   let rua = document.querySelector("#adress");
   let numero = document.querySelector("#houseNum");
   let complemento = document.querySelector("#complement");
@@ -47,14 +42,14 @@ async function renderAdresses () {
   let cidade = document.querySelector("#city");
   let estado = document.querySelector("#states");
   let cep = document.querySelector("#zipcode");
-
-  rua.value = infoAdress.address;
-  numero.value = infoAdress.house_number;
-  complemento.value = infoAdress.complement;
-  bairro.value = infoAdress.district;
-  cidade.value = infoAdress.city;
-  estado.value = infoAdress.states;
-  cep.value = infoAdress.zipcode;
+    rua.value = infoAdress.data.address;
+    numero.value = infoAdress.data.house_number;
+    complemento.value = infoAdress.data.complement;
+    bairro.value = infoAdress.data.district;
+    cidade.value = infoAdress.data.city;
+    estado.value = infoAdress.data.states;
+    cep.value = infoAdress.data.zipcode;
+  }
 }
 
 
@@ -63,4 +58,3 @@ function prevent(e){
 }
 
 renderAdresses();
-toggleBilling()

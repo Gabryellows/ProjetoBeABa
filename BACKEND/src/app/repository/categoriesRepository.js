@@ -45,10 +45,10 @@ class categoriesRepository {
   async update(id, name) {
     const row = await db.query(`
       UPDATE schema.categories
-      SET name = $1
-      WHERE id = $2
+      SET name = $2
+      WHERE id = $1
       RETURNING *
-    `, [name, id]);
+    `, [id, name]);
 
     return row;
   }
