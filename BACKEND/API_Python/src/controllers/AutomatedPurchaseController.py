@@ -22,11 +22,11 @@ class AutomatedPurchaseController(Resource):
     cmd = '''INSERT INTO schema.shop_cart_products (shop_cart_id, product_id, quantity) VALUES (%s, %s, %s)'''
 
     with psycopg2.connect(
-        host="qqtech-1.crqc50gxdjpu.sa-east-1.rds.amazonaws.com",
-        dbname="gleal",
-        port=5432,
-        user="gleal",
-        password="kjri3kj98hj2*",
+        host="",
+        dbname="",
+        port=,
+        user="",
+        password="",
       ) as conn:
 
       with conn.cursor() as cursor:
