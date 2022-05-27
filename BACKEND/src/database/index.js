@@ -1,11 +1,11 @@
 const {Client} = require('pg');
 
 const client = new Client({
-  host: 'qqtech-1.crqc50gxdjpu.sa-east-1.rds.amazonaws.com',
-  port: 5432,
-  user: 'gleal',
-  password:'kjri3kj98hj2*',
-  database: 'gleal',
+  host: '',
+  port: ,
+  user: '',
+  password:'',
+  database: '',
 })
 
 client.connect((error) => {
