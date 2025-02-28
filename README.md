@@ -23,4 +23,4 @@ Front-end:
   
  Banco de dados:
  
-  PostgreSQL - Os dados de conexão foram excluidos por segurança.
+  PostgreSQL 
